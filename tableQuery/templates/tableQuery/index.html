@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <title>产品查询</title>
+</head>
+
+<br>
+   <B>展示所有产品</B>
+    <br>
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>厂商</th>
+            <th>产品型号</th>
+            <th>性能/Gbps</th>
+            <th>最大并发会话/百万</th>
+            <th>每秒新建会话</th>
+            <th>GE电口</th>
+            <th>光口GE</th>
+            <th>万兆电口</th>
+            <th>光口万兆</th>
+            <th>40G接口</th>
+            <th>100G接口</th>
+            <th>URL</th>
+            <th>备注</th>
+        </tr>
+            {% if latest_post %}
+                {% for fw in latest_post %}
+                    <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ fw.2}}</td>
+                    <td>{{ fw.3 }}</td>
+                    <td>{{ fw.4}}</td>
+                    <td>{{ fw.5}}</td>
+                    <td>{{ fw.6}}</td>
+                    <td>{{ fw.7 }}</td>
+                    <td>{{ fw.8 }}</td>
+                    <td>{{ fw.9 }}</td>
+                    <td>{{ fw.10 }}</td>
+                    <td>{{ fw.11 }}</td>
+                    <td>{{ fw.12 }}</td>
+                    <td>{{ fw.1}}</td>
+                    <td>{{ fw.18}}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <p>No tableQuery are available.</p>
+            {% endif %}
+    </table>
+    </body>
+</html>
+
+

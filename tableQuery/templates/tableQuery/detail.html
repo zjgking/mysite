@@ -1,0 +1,15 @@
+{{Model}}
+
+{% if latest_post %}
+    <ul>
+    {% for fw in latest_post %}
+        <li>
+            <a href="/tableQuery/">{{ fw.id }}</a>
+            <a href="/tableQuery/">{{ fw.Model }}</a>
+            <b href="/tableQuery/">{{fw.URL}}</b>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tableQuery are available.</p>
+{% endif %}

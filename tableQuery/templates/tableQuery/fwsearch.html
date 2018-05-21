@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firewall</title>
+    <style>
+        .form-control{
+         background-color:crimson;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="post" >
+        {% csrf_token %}
+        <table cellpadding="1" cellspacing="0" width="100%" bordercolor="#ADADAD">
+            <tr>
+                <input type="checkbox" name="vehicle" value="Bike">冗余电源
+                <input type="checkbox" name="vehicle" value="Car">DC/直流电源
+
+                <select name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat" selected>Fiat</option>
+                <option value="audi">Audi</option>
+                </select>
+            </tr>
+
+            <tr>
+                <!--post_data显示post提交的数据-->
+                <td>GE电口:</td> <td>{{ pd.rj45 }}   {{post_data.rj45}} </td>
+                <td>GE光口:</td> <td>{{ pd.ge_sfp }} {{post_data.ge_sfp}}  </td>
+                <td>万兆电口:</td> <td>{{ pd.g10c }}   {{post_data.g10c}}  </td>
+                <td>万兆光口:</td> <td>{{ pd.sfpp }}   {{post_data.sfpp}} </td>
+                <td>40G口:</td> <td>{{ pd.qsfpp }}  {{post_data.qsfpp}}  </td>
+            </tr>
+            <tr>
+                <td>100G口:</td> <td>{{ pd.cfp }}   {{post_data.cfp}}</td>
+                <td>板卡插槽数量:</td> <td>{{ pd.slot }} {{post_data.slot}} </td>
+                <td>防火墙性能/G:</td> <td>{{ pd.thp }}  {{post_data.thp}}  </td>
+                <td>并发会话数量/M:</td> <td>{{ pd.ccs }}   {{post_data.ccs}}  </td>
+                <td>每秒新建会话:</td> <td>{{ pd.nss }} {{post_data.nss}}  </td>
+            </tr>
+        </table>
+        <input type="submit" value="查询" style="float:right;">
+        <input type="reset" value="重置条件"style="float:right;">
+
+    </form>
+
+    {% if  not pd %}
+        <p>请检查输入的单位是否正确？ 产品，请调整搜索条件再次查询.</p>
+    {% elif not post_data  %}
+        <p>*默认只显示部分内容.</p>
+    {% else %}
+        <table border="1" cellpadding="6" cellspacing="0" width="100%" bordercolor="#ADADAD">
+        <tr valign="top" align="middle">
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">序号</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">厂商</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">产品型号</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">性能/Gbps</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">最大并发会话/百万</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">扩展插槽数</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">千兆电口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">千兆光口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">万兆电口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">万兆光口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">40G口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">100G口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">每秒新建会话</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">备注</span></b></p> </th>
+        </tr>
+            {% for fw in pd %}
+                <tr>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ forloop.counter }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.Vendors}}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"><a href={{fw.URL}}>{{ fw.Model }}</a></span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.Throughput}}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.Concurrent_Sessions}}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.Interface_Module_Slots}}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.GE_RJ45 }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.GE_SFP }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.Cop_10GE }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.SFPP_10GE }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.QSFPP_40GE }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.CFP2_QSFP28_100GE }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.New_Sessions_Sec }}</span></p> </td>
+                <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+    0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+    font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ fw.Notes}}</span></p> </td>
+                </tr>
+            {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

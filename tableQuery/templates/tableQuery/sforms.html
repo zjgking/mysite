@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Forms</title>
+    <style>
+    .form-control{
+     background-color:crimson;
+    }
+    </style>
+</head>
+<body>
+    <form action="" method="post" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <!--post_data显示post提交的数据-->
+                <td><h4>GE电口:</h4></td> <td><h4>{{ formdata.rj45 }}  {{formdata.errors.rj45.0}}   </h4></td>
+                <td><h4>GE光口:</h4></td> <td><h4>{{ formdata.ge_sfp }}    {{formdata.errors.ge_sfp.0}}  </h4> </td>
+                <td><h4>性能:</h4></td> <td><h4>{{ formdata.thp }}  {{formdata.errors.thp.0}}  </h4></td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+        <input type="submit" value="Search" >
+    </form>
+
+</body>
+</html>

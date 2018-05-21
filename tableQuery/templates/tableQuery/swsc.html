@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Switch</title>
+</head>
+<body>
+    <form action="" method="post" onresize="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <!--post_data显示post提交的数据-->
+                <td><h4>GE电口:</h4></td> <td><h4>{{ PD.rj45 }}{{post_data.rj45}} </h4></td>
+                <td><h4>GE光口:</h4></td> <td><h4>{{ PD.ge_sfp }}{{post_data.ge_sfp}}  </h4> </td>
+                <td><h4>万兆电口:</h4></td> <td><h4>{{ PD.g10c }}{{post_data.g10c}}  </h4></td>
+                <td><h4>万兆光口:</h4></td> <td><h4>{{ PD.sfpp }}{{post_data.sfpp}}  </h4></td>
+                <td><h4>业务板卡插槽:</h4></td> <td><h4>{{ PD.slot }}{{post_data.slot}}  </h4></td>
+            </tr>
+            <tr>
+                <td><h4>25G口:</h4></td> <td><h4>{{ PD.g25 }}{{post_data.g25}}  </h4></td>
+                <td><h4>40G口:</h4></td> <td><h4>{{ PD.qsfpp }}{{post_data.qsfpp}}  </h4></td>
+                <td><h4>100G口:</h4></td> <td><h4>{{ PD.cfp }}{{post_data.cfp}}  </h4></td>
+                <td><h4>交换性能/G:</h4></td> <td><h4>{{ PD.thp }}{{post_data.thp}}  </h4></td>
+                <td><h4>转发性能/M:</h4></td> <td><h4>{{ PD.fc }}{{post_data.fc}}  </h4></td>
+            </tr>
+        </table>
+        <input type="submit" value="Search" size="50">
+    </form>
+{% if not PD %}
+    <p>没有找到符合条件的产品.</p>
+{% elif not post_data  %}
+    <p>*默认只显示部分内容.</p>
+{% else %}
+    <table border="1" cellpadding="6" cellspacing="0" width="100%" bordercolor="#ADADAD">
+
+        <tr valign="top" align="middle">
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">序号</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">厂商</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">产品型号</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">背板带宽/Gbps</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">数据包转发率</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">扩展板块插槽数量</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">千兆电口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">千兆光口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">万兆电口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">万兆光口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">25G口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">40G口</span></b></p> </th>
+            <th><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.95pt;margin-bottom:.0001pt"><b><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">100G口</span></b></p> </th>
+        </tr>
+
+            {% for sw in PD %}
+            <tr>
+            <td> <p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ forloop.counter }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.vendors}}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"><a href={{sw.url}}>{{ sw.mod }}</a></span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.switching_capacity}}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.forwarding_capacity}}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.io_slots}}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.ge_port_chasis }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.sfp_port_chasis }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.g10_port_chasis }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.sfpp_port_chasis }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.g25_port }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.g40_port }}</span></p> </td>
+            <td><p class="TableParagraph" style="margin-top:2.85pt;margin-right:0in;margin-bottom:
+0in;margin-left:2.85pt;margin-bottom:.0001pt"><span style="font-size:10.0pt;
+font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">{{ sw.g100_port }}</span></p> </td>
+
+            </tr>
+            {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+
+<html lang="zh">
+<head>
+  <title>Firewall</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+  <script>
+      /* 表单单位提示*/
+  $(function(){
+    $("#thp").focus(function(){
+        $(this).next("span").css('display','inline');
+    });
+    $("#thp").blur(function(){
+        $("span").hide(5000);
+    });
+
+    $("#ccs").focus(function(){
+        $(this).next("span").css('display','inline');
+    });
+    $("#ccs").blur(function(){
+        $("span").hide(5000);
+    });
+  });
+  </script>
+
+  <script>
+  function onsubmit(){
+      var submid=document.getElementById('btn1subm');
+        submid.disabled=true;
+        document.submform.submit();
+	    setTimeout("submid.disabled=false;",8000); //代码核心在这里，3秒还原按钮代码
+
+     }
+  </script>
+
+  <script>
+  function clearNoNum(obj)
+  {
+  //先把非数字的都替换掉，除了数字和.
+  obj.value = obj.value.replace(/[^\d.]/g,"");
+  //必须保证第一个为数字而不是.
+  obj.value = obj.value.replace(/^\./g,"");
+  //保证只有出现一个.而没有多个.
+  obj.value = obj.value.replace(/\.{2,}/g,".");
+  //保证.只出现一次，而不能出现两次以上
+  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+  }
+  </script>
+
+  <script>
+  $().ready(function() {
+    $("#signupForm").validate();
+    });
+  </script>
+
+  <style>
+    .error{
+      color:red;
+    }
+    span{
+      display: none;
+      color:red;
+      font-weight:bold;
+      float:right;
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand text-white" href="http://127.0.0.1:8000/tableQuery/fwsearch/">My style</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="nav nav-pills " role="tablist">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#">产品查询</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="http://127.0.0.1:8000/tableQuery/fwsearch/">安全</a>
+              <a class="dropdown-item" href="http://127.0.0.1:8000/tableQuery/swsc/">网络</a>
+              <a class="dropdown-item" href="#">服务器</a>
+              <a class="dropdown-item" href="#">存储</a>
+            </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="pill" href="#">Word</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link text-white" data-toggle="pill" href="#">Excel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" data-toggle="pill" href="#">PDF</a>
+        </li>
+
+      </ul>
+
+     <!-- <form class="form-inline">
+        <input class="form-control" type="text" placeholder="Search">
+        <button class="btn btn-success" type="button">Search</button>
+      </form>  -->
+    </div>   
+  </nav>
+<br>
+
+
+<div class="container-fluid">
+  <h5>请输入产品参数：</h5>
+
+  <form class="form-inline" action="" name="submform" method="post" id="signupForm" role="form">   {% csrf_token %}
+
+    <table class="table table-bordered table-sm">
+      <tr>
+      <div class="form-group col-md-2">
+        <label for="rj45">千兆电口:</label>
+        <input type="number" class="form-control col-md-7" id="rj45" name="rj45" min="0" value="0" required >
+      </div>
+      <div class="form-group col-md-2">
+        <label for="ge_sfp">千兆光口:</label>
+        <input type="number" class="form-control col-md-7" id="ge_sfp" name="ge_sfp" min="0" value="0" required>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="g10c">万兆电口:</label>
+        <input type="number" class="form-control col-md-7" id="g10c" name="g10c" min="0" value="0" required>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="sfpp">万兆光口:</label>
+        <input type="number" class="form-control col-md-7" min="0" id="sfpp" name="sfpp" value="0" required>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="qsfpp">40G口:</label>
+        <input type="number" class="form-control col-md-7" min="0" id="qsfpp" name="qsfpp" value="0" required>
+      </div>
+      </tr>
+      <div class="form-group col-md-2">
+        <label for="cfp">100G口:</label>
+        <input type="number" class="form-control col-md-7" min="0" id="cfp" name="cfp" value="0" required>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="slot">插槽数量:</label>
+        <input type="number" class="form-control col-md-7" min="0" id="slot" name="slot" value="0" required>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="nss">每秒新建:</label>
+        <input type="number" class="form-control col-md-7" min="0" id="nss" name="nss" value="0" required>
+      </div> 
+
+      <div class="form-group col-md-2">
+        <label for="thp">吞吐性能:</label>
+        <input type="text" class="form-control col-md-7" id="thp" name="thp" min="0" value="0.00" onkeyup="clearNoNum(this)" placeholder="Gbps" required>
+          <span>单位:Gbps</span>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="ccs">最大并发:</label>
+        <input type="text" class="form-control col-md-7" id="ccs" name="ccs" min="0" step="0.01" value="0.00" onkeyup="clearNoNum(this)" required>
+        <span class="spanccs">单位:百万</span>
+      </div>
+
+
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" value="">冗余电源</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" value="">DC电源</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" value="">NGFW</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" value="">SSL VPN</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" value="">支持HA</label>
+      </div>
+      <!--  <div class="form-select">
+        <label for="sel1">单选下拉菜单:</label>
+        <select class="form-control" id="sel1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>  -->
+
+
+      </table>
+        <!-- <input type="submit" value="查询" style="float:right;">  -->
+
+      <button type="submit" class="btn1 btn-info btn-success" id="btn1subm" onclick="onsubmit()">查询</button>
+ 
+  </form>
+
+    {% if  not pd %}
+        <h5>输入单位是否正确？再次搜索.</h5>
+    {% elif not post_data  %}
+        <h6>*没有输入查询条件.</h6>
+    {% else %}
+        <table class="table  table-hover thead-light table-responsive  table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>厂商</th>
+                <th>产品型号</th>
+                <th>性能/Gbps</th>
+                <th>最大并发会话/百万</th>
+                <th>扩展插槽数</th>
+                <th>千兆电口</th>
+                <th>千兆光口</th>
+                <th>万兆电口</th>
+                <th>万兆光口</th>
+                <th>40G口</th>
+                <th>100G口</th>
+                <th>每秒新建会话</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            {% for fw in pd %}
+              <tr class="success">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ fw.Vendors}}</td>
+                <td><input type="checkbox"> <a href={{fw.URL}}> {{ fw.Model }}</td>
+                <td>{{ fw.Throughput}}</td>
+                <td>{{ fw.Concurrent_Sessions}}</td>
+                <td>{{ fw.Interface_Module_Slots}}</td>
+                <td>{{ fw.GE_RJ45 }}</td>
+                <td>{{ fw.GE_SFP }}</td>
+                <td>{{ fw.Cop_10GE }}</td>
+                <td>{{ fw.SFPP_10GE }}</td>
+                <td>{{ fw.QSFPP_40GE }}</td>
+                <td>{{ fw.CFP2_QSFP28_100GE }}</td>
+                <td>{{ fw.New_Sessions_Sec }}</td>
+                <td>{{ fw.Notes}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <button type="button" class="btn btn-success">导出配置清单</button>
+        </div>
+        {% endif %}
+
+
+</div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <script src="/static/bootstrap/js/bootstrap.js"></script>
+
+</body>
+</html>
